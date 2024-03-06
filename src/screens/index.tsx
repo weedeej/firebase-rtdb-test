@@ -1,5 +1,5 @@
 import { NavigationMenu } from "@/enums";
-import { InventoryRounded, MenuRounded, ReceiptLongRounded, SellRounded } from "@mui/icons-material";
+import { Inventory2Rounded, MenuBookRounded, ReceiptLongRounded, SellRounded } from "@mui/icons-material";
 import { MenuPage } from "./MenuPage";
 import { SalesPage } from "./SalesPage";
 import { InvoicingPage } from "./InvoicingPage";
@@ -9,7 +9,7 @@ export default [
   {
     id: NavigationMenu.MENU,
     title: "MENU",
-    icon: <MenuRounded/>,
+    icon: <MenuBookRounded/>,
     component: <MenuPage />
   },
   {
@@ -27,7 +27,7 @@ export default [
   {
     id: NavigationMenu.INVENTORY,
     title: "INVENTORY",
-    icon: <InventoryRounded/>,
+    icon: <Inventory2Rounded/>,
     component: <InventoryPage />
   }
 ]
