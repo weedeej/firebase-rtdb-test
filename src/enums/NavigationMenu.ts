@@ -1,6 +1,6 @@
 export enum NavigationMenu {
-  MENU,
-  SALES,
-  INVOICING,
-  INVENTORY
+  MENU = "menu",
+  SALES = "sales",
+  INVOICING = "invoicing",
+  INVENTORY = "inventory",
 }

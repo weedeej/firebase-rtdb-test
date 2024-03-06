@@ -1,7 +1,22 @@
-import { InventoryRounded, MenuBookRounded, ReceiptLongRounded, SellRounded } from "@mui/icons-material";
-import { Button, Stack, Typography, colors } from "@mui/material";
+"use client";
 
+import { Button, Stack, Typography, colors } from "@mui/material";
+import Screens from "@/screens";
+import { NavigationMenu } from "@/enums";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useMemo } from "react";
 export function Sidebar() {
+  const params = useSearchParams();
+  const currentPage = useMemo(() => {
+    return (params.get("page") as NavigationMenu | null) ?? NavigationMenu.MENU;
+  }, [params]);
+  
+  const router = useRouter();
+
+  function changeScreen(screen: NavigationMenu) {
+    router.push(`/?page=${screen}`);
+  }
+
   return (
     <Stack height="100%" justifyContent="space-between" p={2} borderRadius={2} width={400} bgcolor={colors.grey[900]}>
       <Stack gap={2}>
@@ -14,29 +29,31 @@ export function Sidebar() {
           </Typography>
         </Stack>
         <Stack gap={1}>
-          <Button sx={{py: 2, px: 4, color: "inherit", display: "flex", flexDirection: "row", justifyContent: "start"}} startIcon={<MenuBookRounded />}>
-            <Typography variant="h5" fontWeight={700} component="span">
-              MENU
-            </Typography>
-          </Button>
-          
-          <Button sx={{py: 2, px: 4, color: "inherit", display: "flex", flexDirection: "row", justifyContent: "start"}} startIcon={<SellRounded />}>
-            <Typography variant="h5" fontWeight={700} component="span">
-              SALES
-            </Typography>
-          </Button>
-          
-          <Button sx={{py: 2, px: 4, color: "inherit", display: "flex", flexDirection: "row", justifyContent: "start"}} startIcon={<ReceiptLongRounded />}>
-            <Typography variant="h5" fontWeight={700} component="span">
-              INVOICING
-            </Typography>
-          </Button>
-          
-          <Button sx={{py: 2, px: 4, color: "inherit", display: "flex", flexDirection: "row", justifyContent: "start"}} startIcon={<InventoryRounded />}>
-            <Typography variant="h5" fontWeight={700} component="span">
-              INVENTORY
-            </Typography>
-          </Button>
+          {
+            Screens.map((screen) => (
+              <Button
+                key={`sidebar_nav_${screen.id}`}
+                onClick={currentPage === screen.id ? undefined : () => changeScreen(screen.id)}
+                sx={{
+                  py: 2,
+                  px: 4,
+                  color: "inherit",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "flex-start",
+                  transform: currentPage === screen.id ? "scale(1.1)" : "unset",
+                  "&:hover": {
+                    transition: "all 0.3s ease-in-out",
+                    transform: "scale(1.1)",
+                  }
+                }}
+                startIcon={screen.icon}>
+                <Typography variant="h5" fontWeight={700} component="span">
+                  {screen.title}
+                </Typography>
+              </Button>
+            ))
+          }
         </Stack>
       </Stack>
     </Stack>
