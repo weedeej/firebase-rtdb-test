@@ -21,7 +21,7 @@ export function ReduxValuesPrefetch() {
         setMenuList(
           data ?
             Object.values(data) :
-            null
+            []
         )
       );
     });
@@ -36,7 +36,7 @@ export function ReduxValuesPrefetch() {
         setCategories(
           data ?
             Object.values(data) :
-            null
+            []
         )
       );
     });
