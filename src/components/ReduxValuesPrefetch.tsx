@@ -42,5 +42,5 @@ export function ReduxValuesPrefetch() {
     });
   }, []);
 
-  return (<Box display="hidden" />)
+  return (<></>)
 }
