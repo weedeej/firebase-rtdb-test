@@ -16,8 +16,14 @@ export function ReduxValuesPrefetch() {
   useEffect(() => {
     const menuRef = query(ref(db, "menu"), orderByChild("dateAdded"), limitToLast(10))
     return onValue(menuRef, (snap) => {
-      const data = snap.val() as {[id: string]: Menu};
-      dispatch(setMenuList(Object.values(data)));
+      const data = snap.val() as { [id: string]: Menu } | null;
+      dispatch(
+        setMenuList(
+          data ?
+            Object.values(data) :
+            null
+        )
+      );
     });
   }, []);
 
@@ -25,10 +31,16 @@ export function ReduxValuesPrefetch() {
   useEffect(() => {
     const categoriesRef = query(ref(db, "categories"), orderByChild("name"))
     return onValue(categoriesRef, (snap) => {
-      const data = snap.val() as {[id: string]: Category};
-      dispatch(setCategories(Object.values(data)));
+      const data = snap.val() as { [id: string]: Category } | null;
+      dispatch(
+        setCategories(
+          data ?
+            Object.values(data) :
+            null
+        )
+      );
     });
   }, []);
 
-  return (<Box display="hidden" />) 
+  return (<Box display="hidden" />)
 }
