@@ -7,6 +7,8 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { Header, Sidebar } from "@/components";
 import { CssBaseline, Stack, ThemeProvider, createTheme } from "@mui/material";
+import { Provider } from 'react-redux';
+import { store } from '@/redux/store';
 
 export default function RootLayout({
   children,
@@ -24,18 +26,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <AppRouterCacheProvider>
-          <Stack direction="row" height="calc(100vh - 2em)" gap={2}>
-            <Sidebar />
-            <Stack gap={2} flex={1}>
-              <Header />
-              {children}
-            </Stack>
-          </Stack>
-        </AppRouterCacheProvider>
-        </ThemeProvider>
+        <Provider store={store}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <AppRouterCacheProvider>
+              <Stack direction="row" height="calc(100vh - 2em)" gap={2}>
+                <Sidebar />
+                <Stack gap={2} flex={1}>
+                  <Header />
+                  {children}
+                </Stack>
+              </Stack>
+            </AppRouterCacheProvider>
+          </ThemeProvider>
+        </Provider>
       </body>
     </html>
   );
