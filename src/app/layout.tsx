@@ -22,6 +22,22 @@ export default function RootLayout({
     palette: {
       text: {
         primary: "#eaeaea"
+      },
+    },
+    components: {
+      "MuiMenuItem": {
+        "styleOverrides": {
+          "root": {
+            "color": "MenuText"
+          }
+        }
+      },
+      "MuiButton": {
+        "styleOverrides": {
+          root: {
+            color: "MenuText"
+          }
+        }
       }
     }
   })
