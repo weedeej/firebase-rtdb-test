@@ -5,7 +5,7 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import { Header, Sidebar } from "@/components";
+import { Header, ReduxValuesPrefetch, Sidebar } from "@/components";
 import { Box, CssBaseline, Stack, ThemeProvider, createTheme } from "@mui/material";
 import { Provider } from 'react-redux';
 import { store } from '@/redux/store';
@@ -29,6 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Provider store={store}>
+          <ReduxValuesPrefetch />
           <ThemeProvider theme={theme}>
             <CssBaseline />
             <AppRouterCacheProvider>
