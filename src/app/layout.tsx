@@ -6,9 +6,11 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { Header, Sidebar } from "@/components";
-import { CssBaseline, Stack, ThemeProvider, createTheme } from "@mui/material";
+import { Box, CssBaseline, Stack, ThemeProvider, createTheme } from "@mui/material";
 import { Provider } from 'react-redux';
 import { store } from '@/redux/store';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function RootLayout({
   children,
@@ -36,6 +38,17 @@ export default function RootLayout({
                   <Header />
                   {children}
                 </Stack>
+                <Box position="absolute">
+                  <ToastContainer
+                    position="bottom-center"
+                    autoClose={1000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    draggable
+                    theme="dark" />
+                </Box>
               </Stack>
             </AppRouterCacheProvider>
           </ThemeProvider>
