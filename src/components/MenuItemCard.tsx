@@ -11,10 +11,12 @@ import { useSelector } from "react-redux";
 
 type MenuItemCardProps = {
   item: Menu;
+  onEdit: () => void;
+  onDelete: () => void;
 }
 
 export function MenuItemCard(props: MenuItemCardProps) {
-  const { item } = props;
+  const { item , onEdit, onDelete} = props;
   const [itemImageUrl, setItemImageUrl] = useState("");
   const categories = useSelector((state: StoreState) => state.categories.list);
 
@@ -28,10 +30,6 @@ export function MenuItemCard(props: MenuItemCardProps) {
 
   function getCategoryFromId(id: string) {
     return categories?.find((cat) => cat.id === id);
-  }
-
-  function onDelete() {
-
   }
 
   return (
@@ -60,10 +58,10 @@ export function MenuItemCard(props: MenuItemCardProps) {
         }
       </Stack>
       <Stack direction="row" gap={1} py={1}>
-        <Button color="inherit" variant="outlined" fullWidth>
+        <Button onClick={onEdit} color="inherit" variant="outlined" fullWidth>
           Edit
         </Button>
-        <Button color="error" variant="outlined" fullWidth>
+        <Button onClick={onDelete} color="error" variant="outlined" fullWidth>
           Delete
         </Button>
       </Stack>
