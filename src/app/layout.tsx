@@ -6,11 +6,12 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { Header, ReduxValuesPrefetch, Sidebar } from "@/components";
-import { Box, CssBaseline, Stack, ThemeProvider, createTheme } from "@mui/material";
+import { Box, CircularProgress, CssBaseline, Stack, ThemeProvider, createTheme } from "@mui/material";
 import { Provider } from 'react-redux';
 import { store } from '@/redux/store';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Suspense } from 'react';
 
 export default function RootLayout({
   children,
@@ -49,24 +50,26 @@ export default function RootLayout({
           <ThemeProvider theme={theme}>
             <CssBaseline />
             <AppRouterCacheProvider>
-              <Stack direction="row" height="calc(100vh - 2em)" gap={2}>
-                <Sidebar />
-                <Stack gap={2} flex={1}>
-                  <Header />
-                  {children}
+              <Suspense fallback={<CircularProgress />}>
+                <Stack direction="row" height="calc(100vh - 2em)" gap={2}>
+                  <Sidebar />
+                  <Stack gap={2} flex={1}>
+                    <Header />
+                    {children}
+                  </Stack>
+                  <Box position="absolute">
+                    <ToastContainer
+                      position="bottom-center"
+                      autoClose={1000}
+                      hideProgressBar={false}
+                      newestOnTop={false}
+                      closeOnClick
+                      rtl={false}
+                      draggable
+                      theme="dark" />
+                  </Box>
                 </Stack>
-                <Box position="absolute">
-                  <ToastContainer
-                    position="bottom-center"
-                    autoClose={1000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    draggable
-                    theme="dark" />
-                </Box>
-              </Stack>
+              </Suspense>
             </AppRouterCacheProvider>
           </ThemeProvider>
         </Provider>
