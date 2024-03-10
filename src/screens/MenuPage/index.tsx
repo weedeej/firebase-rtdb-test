@@ -14,7 +14,7 @@ export function MenuPage() {
 
   return (
     <Stack width="100%" gap={2}>
-      <Stack direction="row" justifyContent="space-evenly" alignItems="stretch">
+      <Stack direction="row" justifyContent="center" gap={2} alignItems="stretch">
         {
           menu && <AddMenuSection categories={categories} menuList={menu} />
         }
