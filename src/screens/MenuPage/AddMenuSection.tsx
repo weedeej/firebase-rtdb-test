@@ -115,7 +115,7 @@ export function AddMenuSection(props: AddMenuSectionProps) {
 
   if (!menuList || !categories) return <></>;
   return (
-    <Stack p={2} gap={1} borderRadius={2} sx={{ backgroundColor: colors.grey[700] }} minWidth={500} width="fit-content">
+    <Stack p={2} gap={1} borderRadius={2} sx={{ backgroundColor: colors.grey[900] }} minWidth={500} width="fit-content">
       <Typography variant="h6">
         Add a dish
       </Typography>
@@ -128,7 +128,7 @@ export function AddMenuSection(props: AddMenuSectionProps) {
           <TextField value={formData.stock} inputMode="numeric" inputProps={{ min: 1 }} name="stock" type="number" variant="outlined" placeholder="Stock" onChange={onStockUpdate} sx={{ maxWidth: 88 }} />
         </Box>
         <FormControl sx={{minWidth: 128}}>
-          <InputLabel id="categories-label">Category</InputLabel>
+          <InputLabel id="categories-label" sx={{color: "#FFF"}}>Category</InputLabel>
           <Select labelId="categories-label" label="Category" defaultValue="Categories" value={formData.categoryId} onChange={(e) => explicitUpdate("categoryId", e.target.value)}>
             {
               categories.map((cat) => <MenuItem key={`cat_select_${cat.id}`} value={cat.id}>{cat.name}</MenuItem>)
