@@ -6,6 +6,7 @@ import { Add } from "@mui/icons-material";
 import { AddMenuSection } from "./AddMenuSection";
 import { useSelector } from "react-redux";
 import { StoreState } from "@/redux/store";
+import { AddCategorySection } from "./AddCateogrySection";
 
 export function MenuPage() {
   const menu = useSelector((state: StoreState) => state.menus.list);
@@ -13,9 +14,14 @@ export function MenuPage() {
 
   return (
     <Stack width="100%" gap={2}>
-      {
-        menu && <AddMenuSection categories={categories} menuList={menu}/>
-      }
+      <Stack direction="row" justifyContent="space-evenly" alignItems="stretch">
+        {
+          menu && <AddMenuSection categories={categories} menuList={menu} />
+        }
+        {
+          menu && <AddCategorySection />
+        }
+      </Stack>
       <Stack
         direction="row"
         justifyContent={(menu && menu.length > 0) ? "space-evenly" : "center"}
