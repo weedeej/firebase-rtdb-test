@@ -24,7 +24,6 @@ export function MenuItemCard(props: MenuItemCardProps) {
     const pathReference = ref(storage, item.imageThumbnail);
     getDownloadURL(pathReference).then((res) => {
       setItemImageUrl(res);
-      console.log(res);
     });
   }, []);
 

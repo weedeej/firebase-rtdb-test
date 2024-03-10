@@ -1,5 +1,7 @@
 "use client";
 
+import { VisuallyHiddenInput } from "@/components";
+import { defaultMenuItem } from "@/constants";
 import { db, storage } from "@/firebaseConfig";
 import { useForm } from "@/hooks";
 import { Category, Menu } from "@/types"
@@ -23,17 +25,7 @@ export function AddMenuSection(props: AddMenuSectionProps) {
   const [newOption, setNewOption] = useState("");
   const [isAddItemLoading, setIsAddItemLoading] = useState(false);
 
-  const [formData, updateForm, resetForm, explicitUpdate] = useForm<Menu>({
-    id: "",
-    name: "",
-    categoryId: "",
-    options: [],
-    price: 1,
-    stock: 1,
-    cost: 1,
-    imageThumbnail: "",
-    dateAddedMs: 0
-  });
+  const [formData, updateForm, resetForm, explicitUpdate] = useForm<Menu>(defaultMenuItem);
 
   async function onSave() {
     if (!currentImageFile) return showToast("Image can't be empty", "error");
@@ -121,11 +113,11 @@ export function AddMenuSection(props: AddMenuSectionProps) {
       </Typography>
       <Stack direction="row" gap={1} alignItems="center" width="100%">
         <TextField value={formData.name} name="name" variant="outlined" placeholder="Name" onChange={updateForm} fullWidth />
-        <TextField value={formData.price} name="price" type="number" variant="outlined" placeholder="Price" inputMode="numeric" inputProps={{ min: 1 }} onChange={onPriceUpdate} />
+        <TextField value={formData.price  < 1 ? "" : formData.price} name="price" type="number" variant="outlined" placeholder="Price" inputMode="numeric" inputProps={{ min: 1 }} onChange={onPriceUpdate} />
       </Stack>
       <Stack direction="row" gap={2} alignItems="center">
         <Box>
-          <TextField value={formData.stock} inputMode="numeric" inputProps={{ min: 1 }} name="stock" type="number" variant="outlined" placeholder="Stock" onChange={onStockUpdate} sx={{ maxWidth: 88 }} />
+          <TextField value={formData.stock  < 1 ? "" : formData.stock} inputMode="numeric" inputProps={{ min: 1 }} name="stock" type="number" variant="outlined" placeholder="Stock" onChange={onStockUpdate} sx={{ maxWidth: 88 }} />
         </Box>
         <FormControl sx={{minWidth: 128}}>
           <InputLabel id="categories-label" sx={{color: "#FFF"}}>Category</InputLabel>
@@ -183,15 +175,3 @@ export function AddMenuSection(props: AddMenuSectionProps) {
     </Stack>
   )
 }
-
-const VisuallyHiddenInput = styled('input')({
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
-  height: 1,
-  overflow: 'hidden',
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  whiteSpace: 'nowrap',
-  width: 1,
-});
