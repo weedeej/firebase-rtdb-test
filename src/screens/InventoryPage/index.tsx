@@ -1,3 +1,9 @@
+import { Typography } from "@mui/material";
+
 export function InventoryPage() {
-  return <>inventory</>
+  return (
+    <Typography color="text.secondary">
+      NOT IMPLEMENTED
+    </Typography>
+  )
 }
