@@ -8,6 +8,6 @@ export type Menu = {
   price: number;
   stock: number;
   cost: number;
-  imagePath: string;
+  imageThumbnail: string;
   dateAddedMs: number;
 }

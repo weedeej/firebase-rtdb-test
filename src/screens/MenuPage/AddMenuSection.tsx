@@ -31,7 +31,7 @@ export function AddMenuSection(props: AddMenuSectionProps) {
     price: 1,
     stock: 1,
     cost: 1,
-    imagePath: "",
+    imageThumbnail: "",
     dateAddedMs: 0
   });
 
