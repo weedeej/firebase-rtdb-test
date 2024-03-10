@@ -2,9 +2,9 @@ import { useState } from "react";
 
 /**
  * @param initialData Data of with type of T
- * @returns Array of currentData with type of T, update function, reset function, explicit update
+ * @returns Array of currentData with type of T, update function, reset function, explicit update, setFormData
  */
-export function useForm<T>(initialData: T): [T, (e: React.ChangeEvent) => void, () => void, (key: keyof T, value: any) => void] {
+export function useForm<T>(initialData: T): [T, (e: React.ChangeEvent) => void, () => void, (key: keyof T, value: any) => void, (form: T) => void] {
   const [formState, setFormState] = useState<T>(initialData);
 
   /**
@@ -42,6 +42,10 @@ export function useForm<T>(initialData: T): [T, (e: React.ChangeEvent) => void, 
     });
   }
 
+  function setFormData(form: T) {
+    setFormState(form);
+  }
+
   /**
    * Resets the form data to initial state
    */
@@ -49,5 +53,5 @@ export function useForm<T>(initialData: T): [T, (e: React.ChangeEvent) => void, 
     setFormState(initialData);
   }
 
-  return [formState, update, clear, explicitUpdate];
+  return [formState, update, clear, explicitUpdate, setFormData];
 }
